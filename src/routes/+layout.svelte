@@ -1,11 +1,10 @@
 <script>
 	import '../app.css';
-    import Navbar from './navbar.svelte';
+  import Navbar from './navbar.svelte';
 	let { children } = $props();
 </script>
 <Navbar/>
 {@render children()}
-
 
   <style lang="postcss">
   @reference "tailwindcss";

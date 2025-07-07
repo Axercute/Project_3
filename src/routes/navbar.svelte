@@ -1,17 +1,19 @@
 <script>
-    import {goto} from "$app/navigation"
-
-    const navBarInfo = [
-    {display:"Home", path:""},
-    {display:"Booking", path:"booking"},
-    {display:"Our Pricing", path:"ourpricing"},
-    {display:"Contact Us", path:"contactUs"},
-    ]
-    let open = $state(true)
-    const toggleOpen =()=>{open = !open}
+  import {goto} from "$app/navigation"
+  import {navBarInfo} from "$lib/navBarInfo"
+  let open = true
+  const toggleOpen =(event)=>{event.stopPropagation();open=true}
+  const toggleClose =()=>{open=false}
+  import { onMount} from 'svelte';
+  onMount(() => {
+  window.addEventListener('click', toggleClose);
+  });
 </script>
-    <nav class={`transition-all duration-300 overflow-hidden ${open? `w-1/2` : `w-0`}`}>
-        <div class="flex flex-row text-left font-semibold" onclick={()=>{goto("./"); toggleOpen()}}>
+<img src="/mainlogo.png"alt="Tui na" class="w-[20%] h-[8%] bg-gradient-to-br from-[#7d1b1f] to-red-800 absolute left-0 top-0 z-10 border-3
+    border-black text-2xl  text-white text-center" onclick={toggleOpen}/>
+<nav                                                      
+  class={`transition-[left] duration-500 ease-in-out ${open ? 'left-0' : '-left-1/2'}`}>
+        <div class="flex flex-row text-left font-semibold" onclick={toggleClose}>
         <img src="/mainlogo.png"alt="Tui na" class="w-[40%] h-[8%] mr-3 hover:cursor-pointer"/></div>
         {#each navBarInfo as {display,path}}
         <div onclick={()=>{goto(`/${path}`);toggleOpen()}} class="text-left font-semibold ml-2">{display}</div> 

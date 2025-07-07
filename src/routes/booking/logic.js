@@ -1,9 +1,7 @@
-import { label } from "flowbite-svelte";
-
 export const service = {
   consultation: [
-    { label: "First Consultation", value: "first", price: 28 },
-    { label: "Follow-up Consultation", value: "followup", price: 18 },
+    { label: "First", value: "first", price: 28 },
+    { label: "Follow-up", value: "followup", price: 18 },
   ],
   senior: [
     { label: "Not a Senior", value: "false", price: 1 },

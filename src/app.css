@@ -37,7 +37,7 @@ html, body {
   }
 
   label {
-    @apply flex text-cyan-100 font-semibold;
+    @apply flex text-white font-semibold;
   }
 
   input {

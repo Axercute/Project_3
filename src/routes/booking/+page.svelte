@@ -10,11 +10,11 @@
 
   const handleSubmit=()=>{console.log("sup")}
 </script>
-
+<div class="h-screen justify-center items-center flex">
 <form  onsubmit= {handleSubmit} class= "bg-gradient-to-br from-[#7d1b1f] to-red-700
-flex-center flex-col w-[50%] mx-auto my-auto mt-5 rounded-2xl outline-2 outline-black shadow-2xl shadow-cyan-800">
-
-<div class="- flex flex-row space-x-5 mt-5">
+flex-center flex-col w-[75%] rounded-2xl outline-2 outline-black shadow-2xl shadow-cyan-800 p-2">
+<div class=" text-xl font-extrabold text-white text-outline">Consultation</div>
+<div class="flex flex-row space-x-10">
 {#each service.consultation as element}
 <label class="- hover:cursor-pointer">
 	<input type="radio" bind:group={selectedOption} value={element} class="mt-2"/>
@@ -27,13 +27,12 @@ flex-center flex-col w-[50%] mx-auto my-auto mt-5 rounded-2xl outline-2 outline-
       <label for="first_name" class="mb-2">Your name</label>
       <input type="text" id="first_name" placeholder="John" class="text-center" required />
 </div>
-
 <SelectionBar options={dateRange} selected={dateTitle}/>
 <SelectionBar options={timeRange} selected={timeTitle}/>
-<div class=" text-xl font-extrabold text-white text-outline">Cost Estimated: ${price.toFixed(2)}</div>
+<div class="text-balance font-extrabold text-white text-outline">Cost Estimated: ${price.toFixed(2)}</div>
   
 
-<div class="- flex flex-row space-x-5 mt-5">
+<div class="flex flex-row space-x-5">
 {#each service.senior as element}
 <label class="- hover:cursor-pointer">
 	<input type="radio" bind:group={seniorCheck} value={element} class="mt-2"/>
@@ -44,7 +43,7 @@ flex-center flex-col w-[50%] mx-auto my-auto mt-5 rounded-2xl outline-2 outline-
 
 <button type="submit" class=" bg-white hover:bg-green-400 px-10">Submit</button>
 </form>
-
+</div>
 <style>
 :global(.svelte-select) {
   --rmsc-primary: #d97706;
