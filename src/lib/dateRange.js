@@ -39,5 +39,5 @@ while (start.hour() <= endHour) {
 }
 
 
-export let dateTitle = "Date of visit"
+export let dateTitle = "Date of visit"//
 export let timeTitle = "Time of visit"//
