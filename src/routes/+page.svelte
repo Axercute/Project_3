@@ -17,9 +17,9 @@
   </button>
 </div>
 
-<div class="flex-center text-white bg-red-800">
-    <div class="font-semibold text-white">Treatment Solution For:</div>
-</div>
-<div>
+<div class="flex-center text-white bg-red-800 font-semibold">Treatment Solution For:</div>
 
-</div>
+<div class="flex-center flex-col">
+<img src = "/treatmentPics/digestion.jpg" alt ="digestion" class="w-1/4 h-20 rounded-2xl mt-2 relative"/>
+<div class="bg-red-800 text-white w-1/4 text-center m-0 rounded-2xl">Digestion Problem</div>
+</div>  
