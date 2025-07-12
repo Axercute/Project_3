@@ -1,16 +1,11 @@
 export const service = {
   consultation: [
-    { label: "First", value: "first", price: 28 },
-    { label: "Follow-up", value: "followup", price: 18 },
+    { english_name: "First", chinese_name: "初诊", description: "first", price: 28 },
+    { english_name: "Follow-up", chinese_name: "复诊", description: "followup", price: 18 },
   ],
   senior: [
-    { label: "Not a Senior", value: "false", price: 1 },
-    { label: "Senior", value: "true", price: 0.95 },
+    { english_name: "Not a Senior", chinese_name: "非年长者", description: "false", price: 1 },
+    { english_name: "Senior", chinese_name: "年长者", description: "true", price: 0.95 },
   ],
-  treatment: [
-    { label: "Electrotherapy", value: "electrotherapy", price: 20 },
-    { label: "Orthopedic Reduction", value: "orthopedic", price: 68 },
-    { label: "Bloodletting Therapy", value: "bloodletting", price: 48 },
-    { label: "Bandaging", value: "bandaging", price: 34 }
-  ]
 };
+export let treatmentTitle = "Choose your treatment"

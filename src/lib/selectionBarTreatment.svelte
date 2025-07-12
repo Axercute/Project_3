@@ -22,12 +22,12 @@
     {#each options as element}
       <div class="px-4 py-1 text-center hover:bg-amber-400 cursor-pointer"
         onclick={() => {
-          selected = element;
-          value = element;
+          selected = element.english_name;
+          value = element
           open = false;
         }}
       >
-        {element}
+        {element.english_name}
       </div>
     {/each}
   </div>

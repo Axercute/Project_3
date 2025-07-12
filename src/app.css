@@ -45,7 +45,7 @@ html, body {
   }
 
   nav {
-    @apply bg-gradient-to-br from-[#7d1b1f] to-red-800 absolute left-0 top-0 h-full w-1/2 z-10 border-3
+    @apply bg-gradient-to-br from-[#7d1b1f] to-red-800 absolute h-full w-1/2 z-10 border-3 top-0
     border-black text-2xl  text-white text-center
   }
 
@@ -61,6 +61,14 @@ html, body {
     1px -1px 0 black,
     -1px 1px 0 black,
     1px 1px 0 black;
+}
+
+.text-outline-white {
+  text-shadow:
+    -0.5px -0.5px 0 white,
+    0.5px -0.5px 0 white,
+    0.5px 0.5px 0 white,
+    0.5px 0.5px 0 white;
 }
 
 /* Loader */

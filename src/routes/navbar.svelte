@@ -7,18 +7,34 @@
   import { onMount} from 'svelte';
   onMount(() => {
   window.addEventListener('click', toggleClose);
+  return () => {
+  window.removeEventListener('click', toggleClose);
+};
   });
 </script>
-<img src="/mainlogo.png"alt="Tui na" class="w-[20%] h-[8%] bg-gradient-to-br from-[#7d1b1f] to-red-800 absolute left-0 top-0 z-10 border-3
-    border-black text-2xl  text-white text-center" onclick={toggleOpen}/>
-<nav                                                      
-  class={`transition-[left] duration-500 ease-in-out ${open ? 'left-0' : '-left-1/2'}`}>
+
+<div class="flex bg-gradient-to-br from-[#7d1b1f] to-red-800 space justify-end">
+  <img src="/mainlogo.png"alt="Tui na" class="w-[15%] h-12 bg-gradient-to-br from-[#7d1b1f] to-red-800 absolute left-0 top-0 z-10 border-3
+    border-black text-2xl  text-white text-center" onclick={()=>{goto(`/`)}}/>
+<div class="m-2 w-10 h-8 flex flex-col justify-between cursor-pointer"  onclick={toggleOpen}>
+  <span class="block h-1 bg-black rounded"></span>
+  <span class="block h-1 bg-black rounded"></span>
+  <span class="block h-1 bg-black rounded"></span>
+</div>
+</div>
+
+<nav                                                   
+  class={`fixed transition-[right] duration-500 ease-in-out ${open ? 'right-0' : '-right-1/2'}`}>
         <div class="flex flex-row text-left font-semibold" onclick={toggleClose}>
-        <img src="/mainlogo.png"alt="Tui na" class="w-[40%] h-[8%] mr-3 hover:cursor-pointer"/></div>
+<div class="w-6 h-6 mt-5 relative cursor-pointer -right-40">
+  <span class="absolute inset-0 w-full h-1 bg-amber-400 rotate-45 origin-center"></span>
+  <span class="absolute inset-0 w-full h-1 bg-amber-400 -rotate-45 origin-center"></span>
+</div>
+        </div>
         {#each navBarInfo as {display,path}}
-        <div onclick={()=>{goto(`/${path}`);toggleOpen()}} class="text-left font-semibold ml-2">{display}</div> 
+        <div onclick={()=>{goto(`/${path}`);toggleOpen()}} class="text-right font-semibold mr-2">{display}</div> 
         {/each}
-        <div class=" bg-amber-600 m-2 text-white text-left font-semibold">Grand Opening Sale! Consultation + TuiNa + Cupping / Scraping for only $42
+        <div class=" bg-amber-600 m-2 text-white text-right font-semibold">Grand Opening Sale! Consultation + TuiNa + Cupping / Scraping for only $42
         <img src="/tuipic.jpg"alt="Tui na" class="w-full mr-3 hover:cursor-pointer"/>
         </div>  
     </nav>

@@ -9,9 +9,8 @@ const config = {
 	adapter: adapter(),
 	prerender: {
 	entries: ['*'] // prerender all routes
-    }
-		
-	}
+    },
+	},
 };
 
 export default config;

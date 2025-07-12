@@ -8,7 +8,6 @@
     }
     import {goto} from "$app/navigation"
 </script>
-
 <div class="relative w-full h-auto">
   <img src="/tuina.jpg" alt="Tui na" class="w-full h-auto" />
   <button class="absolute top-[70%] left-[50%] rounded-2xl text-white bg-red-800

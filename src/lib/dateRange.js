@@ -1,17 +1,17 @@
 import dayjs from 'dayjs';
 
-  const today = dayjs();
-  const days = 14;  // 2 weeks
+  let today = dayjs();
+  let days = 14;  // 2 weeks
   //Time format
-  const endHour = 21; // 9 PM in 24h format
-  const openHour = 10
+  let endHour = 21; // 9 PM in 24h format
+  let openHour = 10
 
   // --- DATE RANGE LOGIC ---
-// If it's after 9 PM, start date range from tomorrow
-const dateStart = today.hour() >= endHour ? today.add(1, 'day') : today;
+// If it's after 9 PM, start date range from tomorrow`
+let dateStart = today.hour() >= endHour ? today.add(1, 'day') : today;
 
   // Generate array of Day.js dates from today to 2 weeks later
- export const dateRange = [];
+ export let dateRange = [];
 for (let i = 0; i <= days; i++) {
   dateRange.push(dateStart.add(i, 'day').format('D MMMM YYYY'));
 }
@@ -31,7 +31,7 @@ if (today.hour() >= endHour) {
   }
 }
 
-export const timeRange = [];
+export let timeRange = [];
 
 while (start.hour() <= endHour) {
   timeRange.push(start.format('h A'));
