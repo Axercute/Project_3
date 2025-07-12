@@ -11,6 +11,7 @@
   window.removeEventListener('click', toggleClose);
 };
   });
+  //
 </script>
 
 <div class="flex bg-gradient-to-br from-[#7d1b1f] to-red-800 space justify-end">
