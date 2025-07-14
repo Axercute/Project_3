@@ -1,12 +1,28 @@
 <script>
-    const problems ={
-    Fatigue_or_Insomnia:["Herbal Medication","Acupuncture"],
-    Hormonal_Imbalances:["Herbal Medication","Acupuncture"],
-    Menstrual_Irregularities:["Herbal Medication","Acupuncture"],
-    Cold_And_Flu:["Herbal Medication","Acupuncture"],
-    Chronic_Pain_or_Inflammation:["Herbal Medication","Acupuncture"],
-    }
-    import {goto} from "$app/navigation"
+  // import {treatmentDisplay} from "$lib/treatmentDisplay"
+  //   const problems ={
+  //   Fatigue_or_Insomnia:["Herbal Medication","Acupuncture"],
+  //   Hormonal_Imbalances:["Herbal Medication","Acupuncture"],
+  //   Menstrual_Irregularities:["Herbal Medication","Acupuncture"],
+  //   Cold_And_Flu:["Herbal Medication","Acupuncture"],
+  //   Chronic_Pain_or_Inflammation:["Herbal Medication","Acupuncture"],
+  //   }
+  import {goto} from "$app/navigation"
+  import {treatmentDisplay} from "$lib/treatmentDisplay"
+  let open = $state(false)
+  let descriptionUpdate=$state("")
+  let textUpdate=$state("")
+  const toggleOpen =(event,description,text)=>{event.stopPropagation();open=true;
+    descriptionUpdate=description
+    textUpdate=text
+  }
+  const toggleClose =()=>{event.stopPropagation();open=false}
+//   import { onMount} from 'svelte';
+//   onMount(() => {
+//   window.addEventListener('click', toggleClose);
+//   return () => {
+//   window.removeEventListener('click', toggleClose);
+// };});
 </script>
 <div class="relative w-full h-auto">
   <img src="/tuina.jpg" alt="Tui na" class="w-full h-auto" />
@@ -15,10 +31,33 @@
    Book Appointment 
   </button>
 </div>
-
 <div class="flex-center text-white bg-red-800 font-semibold">Treatment Solution For:</div>
+<!--display flex card on treatment-->
+<div class="flex flex-row flex-wrap justify-center items-center">
+{#each treatmentDisplay as {image,text,description}}
+<div class="relative w-40 h-40 flex justify-center items-center text-center m-2" onclick={(event)=>{toggleOpen(event,description,text)}}>
+<img src = {image} alt ="digestion" class=" rounded-2xl absolute w-full h-full"/>
+<div class="absolute w-full h-full bg-black/50 rounded-2xl"></div>
+<div class=" text-white font-semibold absolute">{text}</div>
+</div>
+{/each}
+</div>
+<!--display flex card on problems-->
+<div class="flex-center text-white bg-red-800 font-semibold">Problems we tackle For:</div>
 
-<div class="flex-center flex-col">
-<img src = "/treatmentPics/digestion.jpg" alt ="digestion" class="w-1/4 h-20 rounded-2xl mt-2 relative"/>
-<div class="bg-red-800 text-white w-1/4 text-center m-0 rounded-2xl">Digestion Problem</div>
-</div>  
+
+
+
+
+<!-- navigation Bar for description -->
+<div class={`opacity-90 transition-[left] duration-500 ease-in-out bg-gradient-to-br from-[#7d1b1f] to-red-800 h-1/3 w-1/2 z-1 flex-center
+ text-md font-semibold text-white fixed ${open ? 'left-0' : '-left-full'} top-[50%] absolute`}>
+ <div class="mx-2">
+  <div class="w-6 h-6 mt-5 absolute cursor-pointer right-2 top-2" onclick={toggleClose}>
+  <span class="absolute inset-0 w-full h-1 bg-amber-400 rotate-45 origin-center"></span>
+  <span class="absolute inset-0 w-full h-1 bg-amber-400 -rotate-45 origin-center"></span>
+</div>
+<strong>{textUpdate}</strong><br/><br/>
+{descriptionUpdate}
+</div>
+</div>
