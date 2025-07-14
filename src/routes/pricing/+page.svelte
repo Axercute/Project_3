@@ -1,39 +1,38 @@
 <script>
-  import { treatment } from '$lib/treatment';
-
-  let selectedCategory = null;
-  let categories = [...new Set(treatment.map(item => item.category))];
-  let filtered = [];
-
-  function selectCategory(category) {
-    selectedCategory = category;
-    filtered = treatment.filter(item => item.category === selectedCategory);
+  import {treatment} from "$lib/treatment"
+  let choices = [...new Set(treatment.map((element) => {return element.category}))];
+  let selectedChoice=treatment[0].category
+  let priceMenu=treatment.filter((element) => {return element.category === selectedChoice});
+  const filterMenu=(element)=>{
+  selectedChoice=element
+  priceMenu=treatment.filter((element)=>{return element.category===selectedChoice})
   }
 </script>
 
-<div class="container">
-  <!-- Category Buttons -->
-  <div class="flex flex-wrap justify-center mb-4 text-white">
-    {#each categories as category}
-      <button
-        class={`btn ${selectedCategory === category ? 'active' : ''} bg-red-800`}
-        onclick={() => selectCategory(category)}
+
+  <div class="flex flex-wrap justify-center mt-3">
+    {#each choices as element}
+      <div
+        class={`px-4 py-2 font-semibold bg-red-400 border border-black text-white
+                ${selectedChoice === element
+                  ? 'bg-red-800' 
+                  : 'text-red-800'}`}
+        onclick={() => filterMenu(element)}
       >
-        {category}
-      </button>
+        {element}
+        </div>
     {/each}
   </div>
 
   <!-- Treatment Cards -->
-  {#if filtered.length}
-    {#each filtered as item}
-      <div class="card">
-        <div class="text-lg font-bold">{item.english_name}</div>
-        <div class="text-sm text-gray-600">{item.chinese_name}</div>
-        <div class="text-red-800 font-semibold mt-1">${item.starting_price}</div>
-      </div>
-    {/each}
-  {:else if selectedCategory}
-    <p class="text-center text-gray-500">No treatments in this category.</p>
-  {/if}
-</div>
+    <div class="flex flex-wrap gap-x-5 gap-y-5 m-5">
+      {#each priceMenu as element}
+        <div class="bg-red-800 border-white text-white text-md font-semi-bold rounded-2xl">
+        <div class="m-2"><strong>{element.english_name}</strong></div>
+        <div class="m-2">{element.description}</div>
+        <div class="text-right m-2"><strong>${element.starting_price}</strong></div>
+        </div>
+      {/each}
+    </div>
+
+    
