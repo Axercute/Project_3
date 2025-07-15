@@ -1,12 +1,25 @@
 <script>
-  import {treatment} from "$lib/treatment"
-  let choices = [...new Set(treatment.map((element) => {return element.category}))];
-  let selectedChoice=treatment[0].category
-  let priceMenu=treatment.filter((element) => {return element.category === selectedChoice});
-  const filterMenu=(element)=>{
-  selectedChoice=element
-  priceMenu=treatment.filter((element)=>{return element.category===selectedChoice})
-  }
+ 
+ import { onMount } from 'svelte';
+  let treatments = [];
+  let choices = [];
+  let selectedChoice;
+  let priceMenu = [];
+
+ onMount (async () => {
+  const res = await fetch('http://localhost:3000/services');
+  treatments = await res.json();
+  choices = [...new Set(treatments.map(t=>t.category))];
+  selectedChoice = choices[0];
+  priceMenu = treatments.filter(t=>t.category ===selectedChoice);
+
+ });
+
+ const filterMenu = (category) => {
+  selectedChoice = category;
+  priceMenu = treatments.filter(t=>t.category ===selectedChoice);
+ }
+
 </script>
 
 
