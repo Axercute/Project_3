@@ -8,7 +8,7 @@
   //   Chronic_Pain_or_Inflammation:["Herbal Medication","Acupuncture"],
   //   }
   import {goto} from "$app/navigation"
-  import {treatmentDisplay} from "$lib/treatmentDisplay"
+  import {treatmentDisplay,problemDisplay} from "$lib/treatmentDisplay"
   let open = $state(false)
   let descriptionUpdate=$state("")
   let textUpdate=$state("")
@@ -44,11 +44,15 @@
 </div>
 <!--display flex card on problems-->
 <div class="flex-center text-white bg-red-800 font-semibold">Problems we tackle For:</div>
-
-
-
-
-
+<div class="flex flex-row flex-wrap justify-center items-center">
+{#each problemDisplay as {image,text,description}}
+<div class="relative w-40 h-40 flex justify-center items-center text-center m-2" onclick={(event)=>{toggleOpen(event,description,text)}}>
+<img src = {image} alt ="digestion" class=" rounded-2xl absolute w-full h-full"/>
+<div class="absolute w-full h-full bg-black/50 rounded-2xl"></div>
+<div class=" text-white font-semibold absolute">{text}</div>
+</div>
+{/each}
+</div>
 <!-- navigation Bar for description -->
 <div class={`opacity-90 transition-[left] duration-500 ease-in-out bg-gradient-to-br from-[#7d1b1f] to-red-800 h-1/3 w-1/2 z-1 flex-center
  text-md font-semibold text-white fixed ${open ? 'left-0' : '-left-full'} top-[50%] absolute`}>
