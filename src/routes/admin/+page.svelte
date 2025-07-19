@@ -1,6 +1,6 @@
 <script>
 import { signIn } from '$lib/authService';
-
+import { goto } from '$app/navigation';
 
 let email = $state("");
 let password = $state("");;
@@ -14,6 +14,7 @@ try {
     const user = await signIn(formData); 
 
     message = 'Successfully logged in';
+    goto('/dashboard');
     } catch (err) {
     message = err.message; 
     }
