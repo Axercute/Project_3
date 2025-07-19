@@ -1,4 +1,7 @@
 <script>
+
+
+
 //function for logging out
 
 function logout() {
@@ -6,7 +9,7 @@ localStorage.removeItem('token');
 window.location.href = '/admin';
 
 }
-
+export let data;
 //buttons
 let menu = ['Dashboard', 'Service Management', 'Appointment Management', 'View Site'];
 let selectedChoice = menu[0];
@@ -14,9 +17,16 @@ let selectedChoice = menu[0];
 </script>
 
 <main>
+
  <div class="flex justify-end items-center mt-3 mr-4">
     <a href="#" on:click={logout} class="text-red-600 hover:text-red-800">Log Out</a>
   </div>
+
+<h1>Welcome, {data.user?.name || 'User'}!</h1> 
+ {#if data.message}
+    <p class="text-green-500">{data.message}</p>  <!-- Display message if it exists -->
+  {/if}
+
 <div class="flex flex-wrap justify-center mt-3 gap-3">
 {#each menu as category}
 <div
