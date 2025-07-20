@@ -23,6 +23,7 @@
 //   return () => {
 //   window.removeEventListener('click', toggleClose);
 // };});
+console.log(import.meta.env.VITE_BACK_END_SERVER_URL);
 </script>
 <div class="relative w-full h-auto">
   <img src="/tuina.jpg" alt="Tui na" class="w-full h-auto" />

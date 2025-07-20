@@ -19,11 +19,7 @@ try {
     message = err.message; 
     }
 };
-
 </script>
-
-
-
 
 <main>
 <form onsubmit={handleSubmit}>
