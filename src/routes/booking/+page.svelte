@@ -46,7 +46,7 @@
   {english_name:wellnessProgrammeEnglishName},
   {english_name:packagedTreatmentEnglishName},
   ],
-  extracomments:additionalRequest,
+  extraComments:additionalRequest,
   multiplier:Number(seniorCheck.price),
   price:Number(price),
   })
@@ -62,7 +62,7 @@
     alert("Please select any treatment before submitting.");
     return;
   }
-    console.log(submissionString)
+    console.log(submissionString);
     const response = await fetch('http://localhost:3000/appointment/createAppointment', {
       method: 'POST',
       headers: {
@@ -72,7 +72,8 @@
     });
 
     const result = await response.json();
-    alert(result.message);
+    const link = result.appointment._id
+    await goto(`/booking/${link}`)
   }
 </script>
 
