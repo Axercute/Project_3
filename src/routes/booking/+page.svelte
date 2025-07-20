@@ -52,12 +52,16 @@
   })
   let submissionString=$derived(JSON.stringify(submissionLogic))
 
-  async function handleSubmit(event) {
-    if (!appointmentDate) {
-    alert("Please select an appointment date before submitting.");
+  const handleSubmit=async(event)=> {
+    event.preventDefault();
+    if (!appointmentDate||!appointmentTime) {
+    alert("Please select an appointment date or time before submitting.");
     return;
   }
-    event.preventDefault();
+  if(!standardTreatmentEnglishName&&!wellnessProgrammeEnglishName&&!packagedTreatmentEnglishName) {
+    alert("Please select any treatment before submitting.");
+    return;
+  }
     console.log(submissionString)
     const response = await fetch('http://localhost:3000/appointment/createAppointment', {
       method: 'POST',
