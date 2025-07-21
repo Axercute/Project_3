@@ -6,7 +6,7 @@
   import SelectionBar from "$lib/selectionBar.svelte"
   import {dateRange,timeRange,dateTitle,timeTitle,} from "$lib/dateRange"
   let name=$state("")
-	let selectedOption = $state(service.consultation[0])
+	let loyaltyCheck = $state(service.consultation[0])
   let seniorCheck = $state(service.senior[0])
   let appointmentDate = $state("")
   let appointmentTime = $state("")
@@ -29,7 +29,7 @@
   let packagedTreatmentEnglishName = $derived(packagedTreatmentSelected.english_name);
   let packagedTreatmentPrice = $derived(Number(packagedTreatmentSelected.starting_price)); 
 
- let price= $derived(((selectedOption.price+standardTreatmentPrice+wellnessProgrammePrice+packagedTreatmentPrice)*seniorCheck.price))
+ let price= $derived(((loyaltyCheck.price+standardTreatmentPrice+wellnessProgrammePrice+packagedTreatmentPrice)*seniorCheck.price))
  let additionalRequest=$state("")
 
  let message = $derived(`This is ${name}, I would like to book a treatment at around $${price.toFixed(2)} on ${appointmentDate} at ${appointmentTime}.
@@ -38,6 +38,7 @@
 
  let submissionLogic = $derived(
   {
+  loyaltyPrice:Number(loyaltyCheck.price),
   name:name,
   date:appointmentDate,
   time:appointmentTime,
@@ -62,7 +63,7 @@
     alert("Please select any treatment before submitting.");
     return;
   }
-    console.log(submissionString);
+    // console.log(submissionString);
     const response = await fetch('http://localhost:3000/appointment/createAppointment', {
       method: 'POST',
       headers: {
@@ -74,6 +75,7 @@
     const result = await response.json();
     const link = result.appointment._id
     await goto(`/booking/${link}`)
+    window.open(`https://wa.me/6582881687?text=${message}`, "_blank");
   }
 </script>
 
@@ -84,7 +86,7 @@ flex-center flex-col w-[75%] rounded-2xl outline-2 outline-white shadow-2xl shad
 <div class="flex flex-row space-x-10">
 {#each service.consultation as element}
 <label class="- hover:cursor-pointer">
-	<input type="radio" bind:group={selectedOption} value={element} class="mt-2"/>
+	<input type="radio" bind:group={loyaltyCheck} value={element} class="mt-2"/>
 	{element.english_name}
 </label>
 {/each}
