@@ -1,5 +1,5 @@
 <script>
-  export const prerender = true;
+  const prerender = true;
   import { goto } from '$app/navigation';
   let senior = false
   import {service,treatmentTitle} from "./logic"
@@ -35,11 +35,50 @@
  let message = $derived(`This is ${name}, I would like to book a treatment at around $${price.toFixed(2)} on ${appointmentDate} at ${appointmentTime}.
  The treatment I am looking for is / are ${standardTreatmentEnglishName?standardTreatmentEnglishName:""}, ${wellnessProgrammeEnglishName?wellnessProgrammeEnglishName:""},${packagedTreatmentEnglishName?packagedTreatmentEnglishName:""},${additionalRequest?additionalRequest:""}
  `)
-const handleSubmit=()=>{window.open(`https://wa.me/6563203959?text=${message}`)}
+
+ let submissionLogic = $derived(
+  {
+  name:name,
+  date:appointmentDate,
+  time:appointmentTime,
+  treatments:[
+  {english_name:standardTreatmentEnglishName},
+  {english_name:wellnessProgrammeEnglishName},
+  {english_name:packagedTreatmentEnglishName},
+  ],
+  extraComments:additionalRequest,
+  multiplier:Number(seniorCheck.price),
+  price:Number(price),
+  })
+  let submissionString=$derived(JSON.stringify(submissionLogic))
+
+  const handleSubmit=async(event)=> {
+    event.preventDefault();
+    if (!appointmentDate||!appointmentTime) {
+    alert("Please select an appointment date or time before submitting.");
+    return;
+  }
+  if(!standardTreatmentEnglishName&&!wellnessProgrammeEnglishName&&!packagedTreatmentEnglishName) {
+    alert("Please select any treatment before submitting.");
+    return;
+  }
+    console.log(submissionString);
+    const response = await fetch('http://localhost:3000/appointment/createAppointment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: submissionString
+    });
+
+    const result = await response.json();
+    const link = result.appointment._id
+    await goto(`/booking/${link}`)
+  }
 </script>
 
 <div class="h-screen justify-center items-center flex">
-<form  onsubmit= {handleSubmit} class= "bg-gradient-to-br from-[#7d1b1f] to-red-700
+<form method="POST" onsubmit= {handleSubmit} class= "bg-gradient-to-br from-[#7d1b1f] to-red-700
 flex-center flex-col w-[75%] rounded-2xl outline-2 outline-white shadow-2xl shadow-cyan-800 p-2">
 <div class=" text-xl font-semibold text-[#E8C6A0]">Consultation</div>
 <div class="flex flex-row space-x-10">
@@ -59,9 +98,9 @@ flex-center flex-col w-[75%] rounded-2xl outline-2 outline-white shadow-2xl shad
 <SelectionBar options={timeRange} selected={timeTitle} bind:value={appointmentTime}/>
 <div class="text-[#E8C6A0] font-semibold text-xl">Standard Treatment</div>
 <SelectionBarTreatment options={standardTreatment} selected={"Select only if required"} bind:value={standardTreatmentSelected}/>
-<div class="text-[#E8C6A0] font-semibold text-xl">Packaged Treatment</div>
-<SelectionBarTreatment options={wellnessProgramme} selected={"Select only if required"} bind:value={wellnessProgrammeSelected}/>
 <div class="text-[#E8C6A0] font-semibold text-xl">TCM Wellness Program</div>
+<SelectionBarTreatment options={wellnessProgramme} selected={"Select only if required"} bind:value={wellnessProgrammeSelected}/>
+<div class="text-[#E8C6A0] font-semibold text-xl">Packaged Treatment</div>
 <SelectionBarTreatment options={packagedTreatment} selected={"Select only if required"} bind:value={packagedTreatmentSelected}/>
 <div class="text-[#E8C6A0] font-semibold text-xl text-outline">Cost Estimated: ${price.toFixed(2)}</div>
 <div class="flex flex-row space-x-5">

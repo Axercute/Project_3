@@ -1,5 +1,5 @@
-export async function load () {
-
+ export async function load () {
+  console.log("hi")
     const token = localStorage.getItem('token');
 
  if(!token) {
@@ -33,5 +33,6 @@ export async function load () {
     message: data.message,
   };
 }
+
 
 

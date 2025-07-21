@@ -11,13 +11,12 @@
   window.removeEventListener('click', toggleClose);
 };
   });
-  //2nd test
 </script>
 
 <div class="flex justify-end items-center bg-gradient-to-br from-[#7d1b1f] to-red-800 sticky top-0 z-10 h-12">
   <img src="/mainlogo.png"alt="Tui na" class="w-[15%] h-12 bg-gradient-to-br from-[#7d1b1f] to-red-800 absolute left-0 top-0 z-10 border-3
     border-black text-2xl  text-white text-center" onclick={()=>{goto(`/`)}}/>
-<div class="m-2 w-10 h-8 flex flex-col justify-between cursor-pointer"  onclick={toggleOpen}>
+<div class="m-2 w-10 h-8 flex flex-col justify-between cursor-pointer"  onclick={(event)=>{toggleOpen(event)}}>
   <span class="block h-1 bg-white rounded"></span>
   <span class="block h-1 bg-white rounded"></span>
   <span class="block h-1 bg-white rounded"></span>
@@ -33,7 +32,7 @@
 </div>
         </div>
         {#each navBarInfo as {display,path}}
-        <div onclick={()=>{goto(`/${path}`);toggleOpen()}} class="text-right font-semibold mr-2">{display}</div> 
+        <div onclick={(event)=>{goto(`/${path}`);toggleClose()}} class="text-right font-semibold mr-2">{display}</div> 
         {/each}
         <div class=" bg-amber-600 m-2 text-white text-right font-semibold">Grand Opening Sale! Consultation + TuiNa + Cupping / Scraping for only $42
         <img src="/tuipic.jpg"alt="Tui na" class="w-full mr-3 hover:cursor-pointer"/>
