@@ -9,14 +9,20 @@
   let data = await res.json()
   appointment=data
  });    
+ const deleteAppointment=async()=>{
+    const response = await fetch(`http://localhost:3000/appointment/deleteAppointment/${appointmentId}`, {
+    method: 'DELETE',
+    });
+    goto("/appointment")
+ }
 </script>
 {#if appointment}
   <div class="flex justify-center items-center min-h-screen">
     <div class="bg-[#7d1b1f] p-6 shadow-lg rounded-2xl space-y-5">
-      <div class="text-2xl font-semibold text-white">Hi {appointment.appointment.name},</div>
+      <div class="text-2xl font-semibold text-white">Your customer is {appointment.appointment.name},</div>
 
       <div class="text-xl text-white font-semibold">
-        You have an upcoming appointment on 
+        They have booked an upcoming appointment on 
         <span class="font-semibold text-green-400">{appointment.appointment.date}</span> 
         at 
         <span class="font-semibold text-green-400">{appointment.appointment.time}</span>.
@@ -26,19 +32,28 @@
         <h3 class="text-xl font-semibold text-white mb-2">Treatments booked:</h3>
         <ol class="list-decimal list-inside text-green-400">
           {#each appointment.appointment.treatments as element}
-            <li>{element.english_name}</li>
+            <li>{element.english_name}, price is ${element.starting_price}</li>
           {/each}
         </ol>
       </div>
+      <div class="font-semibold text-white">Their entry price is ${appointment.appointment.loyaltyPrice}</div>
+      <div class="font-semibold text-white">Their multiplier is {appointment.appointment.multiplier},
+      {#if appointment.appointment.multiplier===1}
+      They are not a senior
+      {:else}
+      They are a senior
+      {/if}
+      </div>
       {#if appointment.appointment.extraComments}
-    <div class="font-semibold text-xl text-white">You have also requested...</div>
+    <div class="font-semibold text-xl text-white">They have also requested...</div>
     <div class="font-semibold text-white">{appointment.appointment.extraComments}</div>
     {/if}
       <div class="text-xl text-white font-semibold">
         Estimated price: 
         <span class="font-semibold text-green-400">${appointment.appointment.price.toFixed(2)}</span>
       </div>
-        <button class="text-black flex-center bg-green-400"onclick={goto("/")}>Return to main site</button>
+      <button class="text-black flex-center bg-green-400"onclick={deleteAppointment}>Delete this appointment</button>
+    <button class="text-black flex-center bg-green-400"onclick={goto("/appointment")}>Return back to handling appointments</button> 
     </div>
   </div>
 {:else}
