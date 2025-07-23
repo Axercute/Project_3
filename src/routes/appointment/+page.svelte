@@ -10,6 +10,7 @@ let appointment=[];
 onMount(async()=>{
 const res=await fetch("http://localhost:3000/appointment")
 appointment=await res.json();
+appointment.sort((a, b) => new Date(a.date) - new Date(b.date))
   choices = [...new Set(appointment.map(t=>t.date))];
   selectedChoice = choices[0];
   dateMenu = appointment.filter(t=>t.date ===selectedChoice);
@@ -50,7 +51,7 @@ const enterParams=(appointmentId)=>{
       <div class="bg-red-800 text-white text-md font-semibold rounded-xl p-4 shadow" onclick={(event)=>{enterParams(element._id)}}>
         <div class="mb-1 text-lg font-bold">{element.name}</div>
         <div class="mb-2 text-sm">{element.time}</div>
-        <div class="text-right text-md font-bold">Total price roughly: ${element.price}</div>
+        <div class="text-right text-md font-bold">Total price roughly: ${element.price.toFixed(2)}</div>
       </div>
     {/each}
   </div>

@@ -28,7 +28,7 @@
         class={`px-4 py-2 font-semibold bg-red-400 border border-black text-white
                 ${selectedChoice === element
                   ? 'bg-red-800' 
-                  : 'text-red-800'}`}
+                  : 'text-red-800'} hover:cursor-pointer hover:bg-red-500`}
         onclick={() => filterMenu(element)}
       >
         {element}
