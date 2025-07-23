@@ -34,6 +34,8 @@ flex-center flex-col w-[75%] mx-auto mt-50 rounded-2xl outline-2 outline-black s
     {#each displayMenu as element}
         <section>{element.address}</section>
         <a href={`https://wa.me/${element.phone}?text=I would like to ask if you have...`} target="_blank"
-class=" bg-amber-200 p-2 rounded-xl hover:bg-amber-600">Click here to chat with us</a>
+        class=" bg-amber-200 p-2 rounded-xl hover:bg-amber-600">Click here to chat with us</a>
+        <a href={element.googleMap} target="_blank"
+        class=" bg-amber-200 p-2 mt-1 rounded-xl hover:bg-amber-600">Click to our branch</a>
     {/each}
 </div>
