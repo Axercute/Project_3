@@ -28,7 +28,7 @@ let displayMenu = [];
 
     
 <div  class="bg-gradient-to-br from-[#7d1b1f] to-red-700 p-2 
-flex-center flex-col w-[75%] mx-auto mt-50 rounded-2xl outline-2 outline-black shadow-2xl shadow-cyan-800">
+flex-center flex-col w-[75%] mx-auto mt-50 rounded-2xl outline-2 outline-black shadow-2xl shadow-cyan-800 md:w-1/3">
 <section>Our Clinics</section>
 <section>Opening Hours：10am-10pm everyday</section>
     {#each displayMenu as element}
