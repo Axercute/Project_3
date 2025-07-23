@@ -28,7 +28,7 @@ console.log(import.meta.env.VITE_BACK_END_SERVER_URL);
 <div class="relative w-full h-auto">
   <img src="/tuina.jpg" alt="Tui na" class="w-full h-auto" />
   <button class="absolute top-[70%] left-[50%] rounded-2xl text-white bg-red-800
-    shadow translate-x-[-50%] translate-y-[-50%]" onclick={()=>{goto("./booking")}}>
+    shadow translate-x-[-50%] translate-y-[-50%] hover:bg-red-400" onclick={()=>{goto("./booking")}}>
    Book Appointment 
   </button>
 </div>
