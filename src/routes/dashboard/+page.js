@@ -31,6 +31,7 @@
   return {
     user: data.user,
     message: data.message,
+    appointments: data.appointments
   };
 }
 

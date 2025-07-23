@@ -1,8 +1,7 @@
 <script>
 
 import { goto } from '$app/navigation';
-
-
+import { onMount } from 'svelte'
 
 //function for logging out
 
@@ -17,22 +16,59 @@ export let data;
     { display: 'Dashboard', path: 'dashboard' },
     { display: 'Service Management', path: 'service-management' },
     { display: 'Appointment Management', path: 'appointment-management' },
-    { display: 'View Site', path: 'view-site' },
+    { display: 'View Site', path: '' },
   ];
 
 //buttons
 //let menu = ['Dashboard', 'Service Management', 'Appointment Management', 'View Site'];
 
 let selectedChoice = menu[0];
+let appointments = [];
 
 //handling navigation
 
   const handleNavigation = (category) => {
     selectedChoice = category; // Update selected category
-    if (category.path) {
-      goto(`/dashboard/${category.path}`); // Navigate based on path
-    }
+    if (category.path === 'dashboard') {
+    goto('/dashboard');
+  } else if (category.path === '') {
+    goto('/');
+  }else if (category.path) {
+    goto(`/dashboard/${category.path}`); // Navigate based on path inside dashboard
+  }
   };
+  //fetch today's appointments
+
+  onMount(async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      goto('/admin');
+      return;
+    }
+
+    try {
+      const res = await fetch('http://localhost:3000/dashboard', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.status === 401) {
+        window.location.href = '/admin';
+        return;
+      }
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch appointments');
+      }
+
+      const data = await res.json();
+      appointments = data.appointments || [];  // Set the appointments data
+    } catch (error) {
+      console.error('Error fetching appointments:', error);
+    }
+  });
+
 
  
 </script>
@@ -61,4 +97,20 @@ let selectedChoice = menu[0];
                  </div>
             {/each}
         </div>
+
+        {#if appointments.length > 0}
+    <h2>Your Appointments Today</h2>
+    <ul>
+      {#each appointments as appointment}
+        <li>
+          <p><strong>{appointment.name}</strong></p>
+          <p>{appointment.date} at {appointment.time}</p>
+          <p>Treatments: {appointment.treatments.join(', ')}</p>
+          <p>Price: ${appointment.price}</p>
+        </li>
+      {/each}
+    </ul>
+  {:else}
+    <p>No appointments today.</p>
+  {/if}
 </main>
