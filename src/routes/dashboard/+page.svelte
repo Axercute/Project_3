@@ -1,5 +1,7 @@
 <script>
 
+import { goto } from '$app/navigation';
+
 
 
 //function for logging out
@@ -10,10 +12,29 @@ window.location.href = '/admin';
 
 }
 export let data;
+
+  const menu = [
+    { display: 'Dashboard', path: 'dashboard' },
+    { display: 'Service Management', path: 'service-management' },
+    { display: 'Appointment Management', path: 'appointment-management' },
+    { display: 'View Site', path: 'view-site' },
+  ];
+
 //buttons
-let menu = ['Dashboard', 'Service Management', 'Appointment Management', 'View Site'];
+//let menu = ['Dashboard', 'Service Management', 'Appointment Management', 'View Site'];
+
 let selectedChoice = menu[0];
 
+//handling navigation
+
+  const handleNavigation = (category) => {
+    selectedChoice = category; // Update selected category
+    if (category.path) {
+      goto(`/dashboard/${category.path}`); // Navigate based on path
+    }
+  };
+
+ 
 </script>
 
 <main>
@@ -34,9 +55,9 @@ let selectedChoice = menu[0];
                 ${selectedChoice === category
                 ? 'bg-red-800' 
                   : 'text-red-800'}`}
-                  on:click={() => selectedChoice = category} 
+                  on:click={() => handleNavigation(category)} 
                   >
-                  {category}
+                  {category.display}
                  </div>
             {/each}
         </div>
