@@ -34,10 +34,10 @@
     <div class="font-semibold text-xl text-white">You have also requested...</div>
     <div class="font-semibold text-white">{appointment.appointment.extraComments}</div>
     {/if}
-      <div class="text-xl text-white font-semibold">
+      <!-- <div class="text-xl text-white font-semibold">
         Estimated price: 
         <span class="font-semibold text-green-400">${appointment.appointment.price.toFixed(2)}</span>
-      </div>
+      </div> -->
         <button class="text-black flex-center bg-green-400"onclick={goto("/")}>Return to main site</button>
     </div>
   </div>

@@ -37,13 +37,6 @@
         </ol>
       </div>
       <div class="font-semibold text-white">Their entry price is ${appointment.appointment.loyaltyPrice}</div>
-      <div class="font-semibold text-white">Their multiplier is {appointment.appointment.multiplier},
-      {#if appointment.appointment.multiplier===1}
-      They are not a senior
-      {:else}
-      They are a senior
-      {/if}
-      </div>
       {#if appointment.appointment.extraComments}
     <div class="font-semibold text-xl text-white">They have also requested...</div>
     <div class="font-semibold text-white">{appointment.appointment.extraComments}</div>
