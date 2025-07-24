@@ -23,22 +23,24 @@ try {
 
 <main>
 <form onsubmit={handleSubmit}>
-<div>
-<label for ="email">Email:</label>
+ <div>
+<label for ="email" class="text-black">Email:</label>
 <input id = "email"
 type="email"
 bind:value={email}
 required
+class=" mt-1 p-2 border border-black rounded-md"
 />
 
 </div>
 
-<div>
-<label for ="password">Password:</label>
+ <div>
+<label for ="password" class="text-black">Password:</label>
 <input id ="password"
 type="password"
 bind:value={password}
 required 
+class=" mt-1 p-2 border border-black rounded-md"
 />
 </div> 
 
@@ -48,9 +50,6 @@ required
 </form>
 
 
-
-
-{#if message}
-<p>{message}</p>
-{/if}
 </main>
+
+
