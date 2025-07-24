@@ -14,11 +14,15 @@
     starting_price: 0
   };
 
+  function logout() {
+localStorage.removeItem('token');
+window.location.href = '/admin';
+
+}
   const menu = [
     { display: 'Dashboard', path: 'dashboard' },
     { display: 'Service Management', path: 'service-management' },
     { display: 'Appointment Management', path: 'appointment-management' },
-    { display: 'View Site', path: '' },
   ];
 
 let selectedChoice = menu[1];
@@ -84,6 +88,7 @@ const addService = async () => {
   if (res.ok) {
     const addedService = await res.json();
     services.push(addedService); // Add the new service to the list
+    services = [...services, addedService];
     isAdding = false;
     console.log('New service added successfully');
   } else {
@@ -159,6 +164,10 @@ const addService = async () => {
     }
   }
 </script>
+
+ <div class="flex justify-end items-center mt-3 mr-4">
+    <a href="#" on:click={logout} class="text-red-600 hover:text-red-800">Log Out</a>
+  </div>
 
 <div class="flex justify-center mt-3 gap-3 flex-wrap">
   {#each menu as category}

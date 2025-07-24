@@ -16,7 +16,6 @@ export let data;
     { display: 'Dashboard', path: 'dashboard' },
     { display: 'Service Management', path: 'service-management' },
     { display: 'Appointment Management', path: 'appointment-management' },
-    { display: 'View Site', path: '' },
   ];
 
 //buttons
@@ -79,10 +78,6 @@ let appointments = [];
     <a href="#" on:click={logout} class="text-red-600 hover:text-red-800">Log Out</a>
   </div>
 
-<h1>Welcome, {data.user?.name || 'User'}!</h1> 
- {#if data.message}
-    <p class="text-green-500">{data.message}</p>  <!-- Display message if it exists -->
-  {/if}
 
 <div class="flex flex-wrap justify-center mt-3 gap-3">
 {#each menu as category}
@@ -98,18 +93,36 @@ let appointments = [];
             {/each}
         </div>
 
-        {#if appointments.length > 0}
-    <h2>Your Appointments Today</h2>
-    <ul>
-      {#each appointments as appointment}
-        <li>
-          <p><strong>{appointment.name}</strong></p>
-          <p>{appointment.date} at {appointment.time}</p>
-          <p>Treatments: {appointment.treatments.join(', ')}</p>
-          <p>Price: ${appointment.price}</p>
-        </li>
-      {/each}
-    </ul>
+    {#if appointments.length > 0}
+    <h2 class="text-center text-xl font-semibold my-4">Welcome, Here are Your Appointments Today</h2> 
+    <div class="container mx-auto py-4 overflow-x-auto">
+      <table class="min-w-full border-collapse border-l border-r border-black">
+        <thead>
+          <tr class="bg-gray-100 border-t border-black">
+            <th class="border-b px-4 py-2">Name</th>
+            <th class="border-b px-4 py-2">Date</th>
+            <th class="border-b px-4 py-2">Time</th>
+            <th class="border-b px-4 py-2">Treatments</th>
+            <th class="border-b px-4 py-2">Price</th>
+            <th class="border-b px-4 py-2">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each appointments as appointment}
+            <tr class="bg-white hover:bg-gray-50">
+              <td class="border-b px-4 py-2 text-center">{appointment.name}</td>
+              <td class="border-b px-4 py-2 text-center">{appointment.date}</td>
+              <td class="border-b px-4 py-2 text-center">{appointment.time}</td>
+              {#each appointment.treatments as element}
+            <li>{element.english_name}</li>
+          {/each}
+              <td class="border-b px-4 py-2 text-center">${appointment.price}</td>
+              <td class="border-b px-4 py-2 text-center">{appointment.extraComments}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
   {:else}
     <p>No appointments today.</p>
   {/if}
