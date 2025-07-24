@@ -10,8 +10,6 @@ let displayMenu = [];
  }
  filterMenu(selectedChoice)
 </script>
-
-
   <div class="flex flex-wrap justify-center mt-3">
     {#each choices as element}
       <div
