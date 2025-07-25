@@ -22,7 +22,7 @@ appointment.sort((a, b) => new Date(a.date) - new Date(b.date))
  }
 
 const enterParams=(appointmentId)=>{
-  goto(`/appointment/${appointmentId}`)
+  goto(`/dashboard/appointment/${appointmentId}`)
 }
 </script>
 
@@ -31,10 +31,10 @@ const enterParams=(appointmentId)=>{
  
     {#each choices as element}
       <div
-        class={`px-4 py-2 font-semibold bg-red-400 border border-black text-white
+        class={`px-4 py-2 font-semibold bg-red-400 border border-black text-white hover:cursor-pointer
                 ${selectedChoice === element
                   ? 'bg-red-800' 
-                  : 'text-red-800'}`}
+                  : 'text-red-800'} hover:cursor-pointer hover:bg-red-500`}
         onclick={() => filterMenu(element)}
       >
         {element}
@@ -48,7 +48,7 @@ const enterParams=(appointmentId)=>{
   <!-- Limit the width on larger screens and stack cards vertically -->
   <div class="w-full max-w-4xl flex flex-col gap-4 mt-5">
     {#each dateMenu as element}
-      <div class="bg-red-800 text-white text-md font-semibold rounded-xl p-4 shadow" onclick={(event)=>{enterParams(element._id)}}>
+      <div class="bg-red-800 text-white text-md font-semibold rounded-xl p-4 shadow hover:bg-red-500 hover:cursor-pointer" onclick={(event)=>{enterParams(element._id)}}>
         <div class="mb-1 text-lg font-bold">{element.name}</div>
         <div class="mb-2 text-sm">{element.time}</div>
         <div class="text-right text-md font-bold">Total price roughly: ${element.price.toFixed(2)}</div>

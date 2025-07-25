@@ -13,7 +13,7 @@
     const response = await fetch(`http://localhost:3000/appointment/deleteAppointment/${appointmentId}`, {
     method: 'DELETE',
     });
-    goto("/appointment")
+    goto("/dashboard/appointment")
  }
 </script>
 {#if appointment}
@@ -45,8 +45,8 @@
         Estimated price: 
         <span class="font-semibold text-green-400">${appointment.appointment.price.toFixed(2)}</span>
       </div>
-      <button class="text-black flex-center bg-green-400"onclick={deleteAppointment}>Delete this appointment</button>
-    <button class="text-black flex-center bg-green-400"onclick={goto("/appointment")}>Return back to handling appointments</button> 
+      <button class="text-black flex-center bg-green-400 hover:bg-green-800"onclick={deleteAppointment}>Delete this appointment</button>
+    <button class="text-black flex-center bg-green-400 hover:bg-green-800"onclick={goto("/dashboard/appointment")}>Return back to handling appointments</button> 
     </div>
   </div>
 {:else}

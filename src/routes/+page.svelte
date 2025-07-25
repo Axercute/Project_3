@@ -24,10 +24,21 @@
 //   window.removeEventListener('click', toggleClose);
 // };});
 console.log(import.meta.env.VITE_BACK_END_SERVER_URL);
+import {onMount} from "svelte"
+import {fade} from "svelte/transition"
+let carousel=["picture1.jpg","picture2.jpg","picture3.jpg","picture4.jpg"]
+let currentIndex=$state(0)
+  // Automatically cycle every 10 seconds
+  onMount(() => {
+    const interval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % carousel.length;
+    }, 10000); // 10000ms = 10 seconds
+    return () => clearInterval(interval); // Cleanup on unmount
+  });
 </script>
-<div class="relative w-full h-auto">
-  <img src="/tuina.jpg" alt="Tui na" class="w-full h-auto" />
-  <button class="absolute top-[70%] left-[50%] rounded-2xl text-white bg-red-800
+<div class="relative w-full h-64 md:h-100 xl:h-180">
+   {#key carousel[currentIndex]} <img src={`/carousel/${carousel[currentIndex]}`} alt="Tui na" class="w-full h-full object-cover absolute" transition:fade={{ duration: 1000 }} key={carousel[currentIndex]}/>{/key}
+  <button class="absolute top-[80%] left-[50%] rounded-2xl text-white bg-red-800
     shadow translate-x-[-50%] translate-y-[-50%] hover:bg-red-400" onclick={()=>{goto("./booking")}}>
    Book Appointment 
   </button>
