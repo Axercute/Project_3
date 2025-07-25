@@ -3,6 +3,9 @@
   import { goto } from '$app/navigation';
   let services = [];
 
+let searchTitle = '';
+let searchCategory = '';
+
   let isEditing = false;
   let currentService = null;
   let isAdding = false; // Track if we are adding a new service
@@ -19,6 +22,11 @@ localStorage.removeItem('token');
 window.location.href = '/admin';
 
 }
+
+$: filteredServices = services.filter(service =>
+  service.english_name.toLowerCase().includes(searchTitle.toLowerCase()) &&
+  service.category.toLowerCase().includes(searchCategory.toLowerCase())
+);
 
 //on mount function that fetches the data
   onMount(async () => {
@@ -148,6 +156,22 @@ const addService = async () => {
     <a href="#" on:click={logout} class="text-red-600 hover:text-red-800">Log Out</a>
   </div>
 
+  <div class="flex justify-center my-4">
+  <div class="flex flex-col space-y-2 w-full max-w-xs">
+    <input
+      type="text"
+      placeholder="Search by English name"
+      bind:value={searchTitle}
+      class="border p-2 rounded"
+    />
+    <input
+      type="text"
+      placeholder="Search by category"
+      bind:value={searchCategory}
+      class="border p-2 rounded"
+    />
+  </div>
+</div>
 <div class="flex justify-center my-3">
  <button on:click={() => isAdding = true} class="px-4 py-2 text-white">Add New Service</button>
  </div>
@@ -167,7 +191,7 @@ const addService = async () => {
       </tr>
     </thead>
     <tbody>
-      {#each services as service}
+      {#each filteredServices as service}
          <tr class="bg-white hover:bg-gray-50">
            <td class="text-center space-y-2 border-b px-4 py-2">
            <button on:click={() => editService(service)}>Update</button>
