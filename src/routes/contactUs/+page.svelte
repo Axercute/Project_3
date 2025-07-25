@@ -27,10 +27,10 @@ let displayMenu = [];
     
 <div  class="bg-gradient-to-br from-[#7d1b1f] to-red-700 p-2 
 flex-center flex-col w-[75%] mx-auto mt-50 rounded-2xl outline-2 outline-black shadow-2xl shadow-cyan-800 md:w-1/3">
-<section>Our Clinics</section>
-<section>Opening Hours：10am-10pm everyday</section>
+<div class="flex font-semibold text-white text-2xl text-center">Our Clinics</div>
+<div class="flex font-semibold text-white text-center">Opening Hours：10am-10pm everyday</div>
     {#each displayMenu as element}
-        <section>{element.address}</section>
+        <div class="flex font-semibold text-white text-center">{element.address}</div>
         <a href={`https://wa.me/${element.phone}?text=I would like to ask if you have...`} target="_blank"
         class=" bg-amber-200 p-2 rounded-xl hover:bg-amber-600">Click here to chat with us</a>
         <a href={element.googleMap} target="_blank"
