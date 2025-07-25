@@ -2,9 +2,6 @@
 
 import { goto } from '$app/navigation';
 import { onMount } from 'svelte'
-
-//function for logging out
-
 function logout() {
 localStorage.removeItem('token');
 window.location.href = '/admin';
@@ -17,10 +14,6 @@ export let data;
     { display: 'Service Management', path: 'service-management' },
     { display: 'Appointment Management', path: 'appointment-management' },
   ];
-
-//buttons
-//let menu = ['Dashboard', 'Service Management', 'Appointment Management', 'View Site'];
-
 let selectedChoice = menu[0];
 let appointments = [];
 
@@ -75,24 +68,8 @@ let appointments = [];
 <main>
 
  <div class="flex justify-end items-center mt-3 mr-4">
-    <a href="#" on:click={logout} class="text-red-600 hover:text-red-800">Log Out</a>
+    <div on:click={goto("/admin")} class="text-red-600 hover:text-red-800">Log Out</div>
   </div>
-
-
-<div class="flex flex-wrap justify-center mt-3 gap-3">
-{#each menu as category}
-<div
-        class={`px-4 py-2 font-semibold bg-red-400 border border-black text-white
-                ${selectedChoice === category
-                ? 'bg-red-800' 
-                  : 'text-red-800'}`}
-                  on:click={() => handleNavigation(category)} 
-                  >
-                  {category.display}
-                 </div>
-            {/each}
-        </div>
-
     {#if appointments.length > 0}
     <h2 class="text-center text-xl font-semibold my-4">Welcome, Here are Your Appointments Today</h2> 
     <div class="container mx-auto py-4 overflow-x-auto">

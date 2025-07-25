@@ -2,10 +2,32 @@
 	import '../app.css';
   import Navbar from './navbar.svelte';
 	let { children } = $props();
-</script>
-<Navbar/>
-{@render children()}
+  const navBarInfo = [
+  {display:"Home", path:""},
+  {display:"Booking", path:"booking"},
+  {display:"Our Pricing", path:"pricing"},
+  {display:"Contact Us", path:"contactUs"},
+  ]
 
+  const adminBarInfo = [
+    { display: 'Home', path: "" },
+    { display: 'Service Management', path: 'service-management' },
+    { display: 'Appointment Management', path: 'appointment-management' },
+  ];
+import {loginStatus} from "$lib/loginStatus"
+let finalNav=$state("")
+$effect(()=>{
+  if ($loginStatus===false) {
+    finalNav=navBarInfo
+    console.log("it is false now")
+  } else {
+    finalNav=adminBarInfo
+    console.log("it is true now")
+  }
+})
+</script>
+<Navbar navBarInfo={finalNav}/>
+{@render children()}
   <style lang="postcss">
   @reference "tailwindcss";
   :global(html) {

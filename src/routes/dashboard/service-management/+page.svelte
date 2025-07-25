@@ -19,27 +19,6 @@ localStorage.removeItem('token');
 window.location.href = '/admin';
 
 }
-  const menu = [
-    { display: 'Dashboard', path: 'dashboard' },
-    { display: 'Service Management', path: 'service-management' },
-    { display: 'Appointment Management', path: 'appointment-management' },
-  ];
-
-let selectedChoice = menu[1];
-
-  const handleNavigation = (category) => {
-    selectedChoice = category;  // Update selected category
- 
-
-   if (category.path === 'dashboard') {
-    goto('/dashboard');
-  } else if (category.path === '') {
-    goto('/');
-  }else if (category.path) {
-    goto(`/dashboard/${category.path}`); // Navigate based on path inside dashboard
-  }
-  };
-
 
 //on mount function that fetches the data
   onMount(async () => {
@@ -169,17 +148,6 @@ const addService = async () => {
     <a href="#" on:click={logout} class="text-red-600 hover:text-red-800">Log Out</a>
   </div>
 
-<div class="flex justify-center mt-3 gap-3 flex-wrap">
-  {#each menu as category}
-    <div
-      class={`px-4 py-2 font-semibold bg-red-400 border border-black text-white
-        ${selectedChoice === category ? 'bg-red-800' : 'text-red-800'}`}
-      on:click={() => handleNavigation(category)} 
-    >
-      {category.display}
-    </div>
-  {/each}
-</div>
 <div class="flex justify-center my-3">
  <button on:click={() => isAdding = true} class="px-4 py-2 text-white">Add New Service</button>
  </div>

@@ -1,7 +1,8 @@
 <script>
-  import {goto} from "$app/navigation"
-  import {navBarInfo} from "$lib/navBarInfo"
-  let open = true
+import {goto} from "$app/navigation"
+import {loginStatus} from "$lib/loginStatus"
+let {navBarInfo}=$props() 
+  let open = $state(true)
   const toggleOpen =(event)=>{event.stopPropagation();open=true}
   const toggleClose =()=>{open=false}
   import { onMount} from 'svelte';
@@ -21,6 +22,7 @@
     onclick={()=>{goto(`/`)}}/>
 <!--Desktop and Ipad-->
   <div class="hidden md:flex space-x-10 text-white font-semibold text-xl">
+    {#if $loginStatus===false}
     {#each navBarInfo as { display, path }}
       <div
         class="cursor-pointer hover:text-amber-300"
@@ -29,6 +31,16 @@
         {display}
       </div>
     {/each}
+    {:else}
+    {#each navBarInfo as { display, path }}
+      <div
+        class="cursor-pointer hover:text-amber-300"
+        onclick={() => goto(`/dashboard/${path}`)}
+      >
+        {display}
+      </div>
+    {/each}
+    {/if}
   </div>
     </div>
 <!--Mobile version-->
@@ -50,12 +62,23 @@
   <span class="absolute inset-0 w-full h-1 bg-amber-400 -rotate-45 origin-center"></span>
 </div>
         </div>
+        {#if $loginStatus===false}
         {#each navBarInfo as {display,path}}
         <div onclick={(event)=>{goto(`/${path}`);toggleClose()}} class="text-right font-semibold mr-2">{display}</div> 
         {/each}
+         {:else}
+    {#each navBarInfo as { display, path }}
+      <div
+        class="text-right font-semibold mr-2"
+        onclick={() => goto(`/dashboard/${path}`)}
+      >
+        {display}
+      </div>
+    {/each}
+    {/if}
         <div class=" bg-amber-600 m-2 text-white text-right font-semibold">Grand Opening Sale! Consultation + TuiNa + Cupping / Scraping for only $42
         <img src="/tuipic.jpg"alt="Tui na" class="w-full mr-3 hover:cursor-pointer"/>
-        </div>  
+        </div> 
     </nav>
 <style lang="postcss">
   @reference "tailwindcss";
