@@ -74,8 +74,8 @@ const addService = async () => {
 
   if (res.ok) {
     const addedService = await res.json();
-    services.push(addedService); // Add the new service to the list
-    // services = [...services, addedService];
+    //services.push(addedService); // Add the new service to the list
+     services = [...services, addedService];
     isAdding = false;
     console.log('New service added successfully');
   } else {
@@ -194,8 +194,8 @@ const addService = async () => {
       {#each filteredServices as service}
          <tr class="bg-white hover:bg-gray-50">
            <td class="text-center space-y-2 border-b px-4 py-2">
-           <button on:click={() => editService(service)}>Update</button>
-           <button on:click={() => deleteService(service._id)}>Delete</button></td>
+           <button class="text-white" on:click={() => editService(service)}>Update</button>
+           <button class="text-white" on:click={() => deleteService(service._id)}>Delete</button></td>
           <td class="border-b px-4 py-2 text-center">{service.english_name}</td>
           <td class="border-b px-4 py-2 text-center">{service.chinese_name}</td>
           <td class="border-b px-4 py-2 text-center">{service.category}</td>
