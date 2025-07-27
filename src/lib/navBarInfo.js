@@ -1,11 +1,4 @@
-  export const navBarInfo = [
-  {display:"Home", path:""},
-  {display:"Booking", path:"booking"},
-  {display:"Our Pricing", path:"pricing"},
-  {display:"Contact Us", path:"contactUs"},
-  ]
-
-  export const contactUsInfo = [
+ export const contactUsInfo = [
     {address:"Maxwell Branch Address: 272, South Bridge Road, S058821 (Next to Buddha Tooth Relic Temple)",
       phone:"6582881687",
       branch:"Main Branch",
