@@ -74,8 +74,8 @@ const addService = async () => {
 
   if (res.ok) {
     const addedService = await res.json();
-    services.push(addedService); // Add the new service to the list
-    // services = [...services, addedService];
+    //services.push(addedService); // Add the new service to the list
+    services = [...services, addedService];
     isAdding = false;
     console.log('New service added successfully');
   } else {
