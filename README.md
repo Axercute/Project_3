@@ -1,6 +1,6 @@
 This project was done mainly with Tailwind CSS and Svelte. There was ESLint + prettier here but we did not implement due to proving not everything is in AI. 
 
-The project key contributors are:
+The project key contributors are:  
  **John** (Svelte + Tailwind + express CRUD)  
  **Jamie** (Express CRUD + Jwt token + DAO management)  
  **Shao Quan** (Assisting in key improvements and coaching feedbacks, SEO engine for Google)  
@@ -62,7 +62,7 @@ New web phone view
 
 Svelte code sharing (Navigation page in admin and customer logic)
 
-*How it being? starts with js VDOM in lib*
+*How it begin? starts with js VDOM in lib*
 ```javascript
 //Storage of virtual DOM in lib
 import { writable } from 'svelte/store';
